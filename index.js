@@ -37,7 +37,7 @@ async function run() {
 
 
 
-
+    // user collection 
     // save user detail and role in db 
     app.put('/users/:email', async (req, res) => {
       const email = req.params.email
@@ -50,6 +50,14 @@ async function run() {
       const result = await usersCollection.updateOne(query, updateDoc, options)
       res.send(result)
     });
+
+    // Get user
+    app.get('/users/:email', async (req, res) => {
+      const email = req.params.email
+      const query = { email: email }
+      const result = await usersCollection.findOne(query)
+      res.send(result)
+    })
 
 
 
@@ -73,7 +81,13 @@ async function run() {
       res.send(result)
     })
 
-
+    // delete cart items 
+    app.delete('/cart/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await cartCollection.deleteOne(query);
+      res.send(result)
+    })
 
 
 
@@ -104,9 +118,9 @@ run().catch(console.dir)
 
 
 app.get('/', (req, res) => {
-  res.send('AirCNC Server is running..')
+  res.send('languagevio Server is running..')
 })
 
 app.listen(port, () => {
-  console.log(`AirCNC is running on port ${port}`)
+  console.log(`languagevio is running on port ${port}`)
 })
