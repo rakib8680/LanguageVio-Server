@@ -31,8 +31,9 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    const usersCollection = client.db('languageVio').collection('users')
+    const usersCollection = client.db('languageVio').collection('users');
     const cartCollection = client.db('languageVio').collection('cart');
+    const classCollection = client.db('languageVio').collection('classes');
 
 
 
@@ -90,6 +91,18 @@ async function run() {
     })
 
 
+
+
+
+
+
+    // class collection 
+    // add class to db 
+    app.post('/classes', async (req, res) => {
+      const classData = req.body;
+      const result = await classCollection.insertOne(classData);
+      res.send(result)
+    })
 
 
 
