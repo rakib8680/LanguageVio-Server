@@ -102,6 +102,14 @@ async function run() {
       const classData = req.body;
       const result = await classCollection.insertOne(classData);
       res.send(result)
+    });
+
+    // get teacher specified classes 
+    app.get('/classes/:email', async (req, res) => {
+      const email = req.params.email;
+      const query = {'email' : email};
+      const result = await classCollection.find(query).toArray();
+      res.send(result)
     })
 
 
