@@ -97,6 +97,12 @@ async function run() {
 
 
     // class collection 
+    // get all classes 
+    app.get('/classes', async (req, res) => {
+      const result = await classCollection.find().toArray();
+      res.send(result)
+    })
+
     // add class to db 
     app.post('/classes', async (req, res) => {
       const classData = req.body;
@@ -107,10 +113,10 @@ async function run() {
     // get teacher specified classes 
     app.get('/classes/:email', async (req, res) => {
       const email = req.params.email;
-      const query = {'email' : email};
+      const query = { 'email': email };
       const result = await classCollection.find(query).toArray();
       res.send(result)
-    })
+    });
 
 
 
