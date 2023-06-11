@@ -61,7 +61,7 @@ async function run() {
     });
 
     // get all user 
-    app.get('/users', async (req, res) =>{
+    app.get('/users', async (req, res) => {
       const result = await usersCollection.find().toArray();
       res.send(result)
     })
@@ -109,7 +109,21 @@ async function run() {
     app.get('/classes', async (req, res) => {
       const result = await classCollection.find().toArray();
       res.send(result)
-    })
+    });
+
+      // Update A class
+      app.patch('/classes/:id', async (req, res) => {
+        const singleClass = req.body
+        const id = req.params.id
+        const filter = { _id: new ObjectId(id) }
+        const updateDoc = {
+          $set: {
+            ...singleClass
+          }
+        }
+        const result = await classCollection.updateOne(filter, updateDoc)
+        res.send(result)
+      })
 
     // add class to db 
     app.post('/classes', async (req, res) => {
