@@ -58,7 +58,16 @@ async function run() {
       const query = { email: email }
       const result = await usersCollection.findOne(query)
       res.send(result)
+    });
+
+    // get all user 
+    app.get('/users', async (req, res) =>{
+      const result = await usersCollection.find().toArray();
+      res.send(result)
     })
+
+
+
 
 
 
@@ -70,7 +79,6 @@ async function run() {
       const result = await cartCollection.insertOne(item)
       res.send(result)
     });
-
 
     // get Cart items
     app.get('/cart', async (req, res) => {
