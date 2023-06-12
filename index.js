@@ -111,19 +111,28 @@ async function run() {
       res.send(result)
     });
 
-      // Update A class
-      app.patch('/classes/:id', async (req, res) => {
-        const singleClass = req.body
-        const id = req.params.id
-        const filter = { _id: new ObjectId(id) }
-        const updateDoc = {
-          $set: {
-            ...singleClass
-          }
+    // get single class 
+    app.get('/classes/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await classCollection.findOne(query);
+      res.send(result)
+    })
+
+
+    // Update A class
+    app.patch('/classes/:id', async (req, res) => {
+      const singleClass = req.body
+      const id = req.params.id
+      const filter = { _id: new ObjectId(id) }
+      const updateDoc = {
+        $set: {
+          ...singleClass
         }
-        const result = await classCollection.updateOne(filter, updateDoc)
-        res.send(result)
-      })
+      }
+      const result = await classCollection.updateOne(filter, updateDoc)
+      res.send(result)
+    })
 
     // add class to db 
     app.post('/classes', async (req, res) => {
