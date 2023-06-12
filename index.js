@@ -111,14 +111,6 @@ async function run() {
       res.send(result)
     });
 
-    // get single class 
-    app.get('/classes/:id', async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) };
-      const result = await classCollection.findOne(query);
-      res.send(result)
-    })
-
 
     // Update A class
     app.patch('/classes/:id', async (req, res) => {
@@ -148,6 +140,14 @@ async function run() {
       const result = await classCollection.find(query).toArray();
       res.send(result)
     });
+
+     // get single class 
+     app.get('/class/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await classCollection.findOne(query);
+      res.send(result)
+    })
 
 
 
