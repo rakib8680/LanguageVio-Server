@@ -39,7 +39,7 @@ async function run() {
 
 
 
-    // user collection 
+    // user collection................................................................................................ 
     // save user detail and role in db 
     app.put('/users/:email', async (req, res) => {
       const email = req.params.email
@@ -73,7 +73,7 @@ async function run() {
 
 
 
-    // cart collection 
+    // cart collection................................................................................................ 
     // post cart 
     app.post('/cart', async (req, res) => {
       const item = req.body;
@@ -105,13 +105,12 @@ async function run() {
 
 
 
-    // class collection 
+    // class collection................................................................................................
     // get all classes 
     app.get('/classes', async (req, res) => {
       const result = await classCollection.find().toArray();
       res.send(result)
     });
-
 
     // Update A class
     app.patch('/classes/:id', async (req, res) => {
@@ -150,8 +149,6 @@ async function run() {
       res.send(result)
     });
 
-
-
     // get single class 
     app.get('/payment/:id', async (req, res) => {
       const id = req.params.id;
@@ -159,6 +156,14 @@ async function run() {
       const result = await cartCollection.findOne(query);
       res.send(result)
     });
+
+
+
+
+
+
+
+
 
     // create payment intent 
     app.post('/create-payment-intent', async (req, res) => {
